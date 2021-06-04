@@ -27,3 +27,31 @@ const todos = [
       }
       : todo
   );
+
+  const state = {
+    posts: [
+      {
+        id: 1,
+        title: '제목입니다.',
+        body: '내용입니다.',
+        comments: [
+          {
+            id: 1,
+            text: '와 정말 잘 읽었습니다.'
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: '제목입니다.',
+        body: '내용입니다.',
+        comments: [
+          {
+            id: 2,
+            text: '또 다른 댓글 어쩌고 저쩌고'
+          }
+        ]
+      }
+    ],
+    selectedId: 1
+  };
