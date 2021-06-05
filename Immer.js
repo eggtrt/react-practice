@@ -55,3 +55,26 @@ const todos = [
     ],
     selectedId: 1
   };
+
+  const nextState = {
+    ...state,
+    posts: state.posts.map(post =>
+      post.id === 1
+        ? {
+            ...post,
+            comments: post.comments.concat({
+              id: 3,
+              text: '새로운 댓글'
+            })
+          }
+        : post
+    )
+  };
+
+  const nextState = produce(state, draft => {
+    const post = draft.posts.find(post => post.id === 1);
+    post.comments.push({
+      id: 3,
+      text: '와 정말 쉽다!'
+    });
+  });
