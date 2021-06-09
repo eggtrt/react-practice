@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import Hello from './hello';
+import InputSample from './InputSample';
 import Wrapper from './Wrapper';
 
 function countActiveUsers (users) {
@@ -7,11 +8,9 @@ function countActiveUsers (users) {
   return users.filter(user => user.active).length
 }
 function App() {
-  const [user, setUser] = useState();
-  const count = useMemo(countActiveUsers(users), [user]);
   return (
     <>
-    <Hello name="react" color="red"></Hello>
+    <InputSample></InputSample>
     <Wrapper></Wrapper>
     </>
   );

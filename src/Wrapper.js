@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Wrapper ({ children }) {
+function Wrapper ({ children, style }) {
     return (
         <div style={style}>{children}</div>
     )
