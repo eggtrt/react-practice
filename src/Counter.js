@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 
 class Counter extends Component {
+  constructor(props) {
+    super(props);
+    console.log("constructor");
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log("getDerivedStateFromProps");
+    if (nextProps.color !== prevState.color) {
+      return { color: nextProps.color };
+    }
+    return null;
+  }
   state = {
     counter: 0,
     fixed: 1
