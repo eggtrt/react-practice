@@ -12,6 +12,20 @@ class Counter extends Component {
     }
     return null;
   }
+
+  shouldComponentUpdate(nextProps, nextState) { // 리렌더링 여부 결정
+    console.log("shouldComponentUpdate", nextProps, nextState);
+    // 숫자의 마지막 자리가 4면 리렌더링하지 않습니다
+    return nextState.number % 10 !== 4;
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) { // 변화가 일어나기 직전 특정값 반환
+    console.log("getSnapshotBeforeUpdate");
+    if (prevProps.color !== this.props.color) {
+      return this.myRef.style.color;
+    }
+    return null;
+  }
   state = {
     counter: 0,
     fixed: 1
