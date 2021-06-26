@@ -48,6 +48,10 @@ class Counter extends Component {
     counter: 0,
     fixed: 1
   };
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+  }
   handleIncrease = () => {
     this.setState(
       {
