@@ -44,6 +44,11 @@ function reducer(state, action) {
           [action.name]: action.value
         }
       };
+    case 'CREATE_USER':
+      return {
+        inputs: initialState.inputs,
+        users: state.users.concat(action.user)
+      };
     default:
       return state;
   }
@@ -51,6 +56,8 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const nextId = useRef(4);
+
   const { users } = state;
   const { username, email } = state.inputs;
 
@@ -63,9 +70,26 @@ function App() {
     });
   }, []);
 
+  const onCreate = useCallback(() => {
+    dispatch({
+      type: 'CREATE_USER',
+      user: {
+        id: nextId.current,
+        username,
+        email
+      }
+    });
+    nextId.current += 1;
+  }, [username, email]);
+
   return (
     <>
-      <CreateUser username={username} email={email} onChange={onChange} />
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
       <UserList users={users} />
       <div>활성사용자 수 : 0</div>
     </>
