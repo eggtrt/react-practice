@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PostList from '../components/PostList';
-import { getPosts } from '../modules/posts';
+import { getPost, clearPost } from '../modules/posts';
+import Post from '../components/Post';
 
-function PostListContainer() {
-  const { data, loading, error } = useSelector(state => state.posts.posts);
+function PostContainer({ postId }) {
+  const { data, loading, error } = useSelector(state => state.posts.post);
   const dispatch = useDispatch();
 
-  // 컴포넌트 마운트 후 포스트 목록 요청
   useEffect(() => {
-    if (data) return;
-    dispatch(getPosts());
-  }, [data, dispatch]);
+    dispatch(getPost(postId));
+    return () => {
+      dispatch(clearPost());
+    };
+  }, [postId, dispatch]);
 
   if (loading) return <div>로딩중...</div>;
   if (error) return <div>에러 발생!</div>;
   if (!data) return null;
-  return <PostList posts={data} />;
+
+  return <Post post={data} />;
 }
 
-export default PostListContainer;
+export default PostContainer;
